@@ -176,6 +176,9 @@ class TM_Form extends CRM_Core_Form {
             $this->assign('post_'.$name, $value);
         }
 
+        // Include any like-named js or css files
+        _tmcivi_include_resources($this->tmref);
+
         // Add breadcrumb
         $bc = TM_Util::build_action_breadcrumb($this->properties);
         CRM_Utils_System::appendBreadCrumb( $bc );

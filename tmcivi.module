@@ -1,0 +1,129 @@
+<?php
+/*
+ * $Id$
+ */
+
+
+define('TM_ROOT_PATH', realpath( dirname( __FILE__ ) ) );
+
+/*
+define ('TM_RESOURCE_ROOT_URL',
+    drupal_get_path('module','tmcivi'). '/resource'
+);
+
+define ('TM_FAILSAFE_PATH', TM_ROOT_URL .'/error');
+define ('TM_DEFAULT_TITLE', variable_get('site_name', ''));
+define ('TM_DEFAULT_PAGE', 'default');
+
+ *
+ *
+ */
+
+define ('TM_ROOT_URL', 'civicrm/tm');
+
+require 'functions.php';
+
+/**
+ * Implementation of hook_init()
+ */
+function tmcivi_init() {
+  _tmcivi_initialize();
+}
+
+/**
+ * Implementation of hook_perm()
+ */
+function tmcivi_perm() {
+  $perms = array(
+    'access tmcivi',
+    'administer tmcivi',
+  );
+
+  return $perms;
+}
+
+/* Implementation of hook_civicrm_config
+ */
+function tmcivi_civicrm_config( &$config ) {
+    _tmcivi_initialize();
+}
+
+/* Implementation of hook_civicrm_xmlMenu
+ */
+function tmcivi_civicrm_xmlMenu( &$files ) {
+    $files[] =
+        drupal_get_path('module', 'tmcivi') . DIRECTORY_SEPARATOR .
+        'civicrm_xmlMenu.xml';
+}
+
+/*
+ * Implementation of hook_civicrm_pageRun
+ */
+function tmcivi_civicrm_pageRun(&$page) {
+    // Include any like-named js and css files.
+    _tmcivi_include_resources($page->getVar('_name'));
+}
+
+/**
+ * Implementation of hook_tmcivi_registry
+ * @return array
+ */
+function tmcivi_tmcivi_registry() {
+    $registry = array(
+        /* Format: ID => array(
+         *      'p'     => PERM,
+         *      't'     => TITLE,
+         *      'b'     => BREADCRUMB,
+         *      'f'     => IS_FORM,
+         *      'a'     => ACL REQUIREMENT (eval'd code)
+         * );
+         */
+        'viewExamplePage' => array( 'p' => 'administer tmcivi', 't' => 'Example Page'),
+        'viewExampleForm' => array( 'p' => 'administer tmcivi', 't' => 'Example Form', 'b' => 'tm:viewExamplePage', ),
+        'viewExampleRaw' => array( 'p' => 'administer tmcivi', ), // raw output with own template
+        '' => array( 'p' => ''),
+    );
+    return $registry;
+}
+
+/**
+ * Implementation of hook_tmcivi_template_dir
+ */
+function tmcivi_tmcivi_template_dir() {  
+    return TM_ROOT_PATH . DIRECTORY_SEPARATOR . 'Smarty/templates';
+}
+
+/**
+ * Implementation of hook_tmcivi_plugins_dir
+ * @param <type> $plugins_dir
+ */
+function tmcivi_tmcivi_plugins_dir() {
+    return TM_ROOT_PATH . DIRECTORY_SEPARATOR . 'Smarty/plugins';
+}
+
+/**
+ * Implementation of hook_tmcivi_custom_php_dir
+ * @param <type> $plugins_dir
+ */
+function tmcivi_tmcivi_class_dir() {
+    return TM_ROOT_PATH . '/class';
+}
+
+/**
+ * Implementation of hook_tmcivi_resource_dir
+ * @param <type> $type
+ * @param <type> $plugins_dir
+ */
+function tmcivi_tmcivi_resource_dir($type, &$plugins_dir = array()) {
+    if ($type == 'js') {
+        return drupal_get_path('module', 'tmcivi') . '/resource/js/auto';
+        
+    } elseif ($type == 'css') {
+      return drupal_get_path('module', 'tmcivi') . '/resource/css/auto';
+        
+    } elseif ($type == 'base') {
+      return drupal_get_path('module', 'tmcivi') . '/resource';
+
+    }
+
+}

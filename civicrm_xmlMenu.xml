@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+
+<menu>
+  <item>
+     <path>civicrm/tm/page</path>
+     <page_callback>TM_Page</page_callback>
+     <access_arguments>access tmcivi</access_arguments>
+     <is_public>1</is_public>
+  </item>
+  <item>
+     <path>civicrm/tm/form</path>
+     <page_callback>TM_Form</page_callback>
+     <access_arguments>access tmcivi</access_arguments>
+     <is_public>1</is_public>
+  </item>
+  <item>
+     <path>civicrm/tm/raw</path>
+     <page_callback>TM_Raw_Page</page_callback>
+     <access_arguments>access tmcivi</access_arguments>
+     <is_public>1</is_public>
+  </item>
+</menu>

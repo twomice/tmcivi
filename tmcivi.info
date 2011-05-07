@@ -1,0 +1,7 @@
+name = tmcivi tools
+description = Framework for TwoMice modifications to CiviCRM
+version = 6.x-1.0-alpha
+dependencies[] = civicrm
+package = CiviCRM
+core = 6.x
+php = 5.2

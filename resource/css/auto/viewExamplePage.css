@@ -1,0 +1,11 @@
+/*
+ * $Id$
+*/
+
+#exampleOutput {
+  color: #000080;
+  background: lightblue;
+  border: 1px solid #000080;
+  line-height: 2em;
+  padding: 0 .25em;
+}

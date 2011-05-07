@@ -1,6 +1,7 @@
 tmcivi: A module required by some other modules that modify CiviCRM features.
 
-Copyright (C) 2010  Allen Shaw (allen@nswebsolutions.com)
+Copyright (C) 2010  Allen Shaw (http://github.com/twomice 
+	or http://nswebsolutions.com)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

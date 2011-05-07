@@ -115,3 +115,27 @@ function _tmcivi_include_resources($pageName) {
 function _tmcivi_document_root() {
     return $_SERVER['DOCUMENT_ROOT'];
 }
+
+/**
+ * db_query wrapper for civicrm/tmcivi tables. Switches to civicrm database,
+ * makes query, then switches back to drupal database.
+ * @param string $query The query to run. Extra parameters are handled same way
+ *      as db_query does.
+ * @return mixed Whatever is returned from db_query.
+ */
+function tm_query($query) {
+  
+    $args = func_get_args();
+
+    $exe = TM_Exe::get();
+    if ($exe->debug) {
+        $func = 'db_queryd';
+    } else {
+        $func = 'db_query';
+    }
+
+    $default = db_set_active('civicrm');
+    $ret = call_user_func_array($func, $args);
+    db_set_active($default);
+    return $ret;
+}

@@ -95,7 +95,6 @@ function tmcivi_tmcivi_template_dir() {
 
 /**
  * Implementation of hook_tmcivi_plugins_dir
- * @param <type> $plugins_dir
  */
 function tmcivi_tmcivi_plugins_dir() {
     return TM_ROOT_PATH . DIRECTORY_SEPARATOR . 'Smarty/plugins';
@@ -103,7 +102,6 @@ function tmcivi_tmcivi_plugins_dir() {
 
 /**
  * Implementation of hook_tmcivi_custom_php_dir
- * @param <type> $plugins_dir
  */
 function tmcivi_tmcivi_class_dir() {
     return TM_ROOT_PATH . '/class';
@@ -111,10 +109,8 @@ function tmcivi_tmcivi_class_dir() {
 
 /**
  * Implementation of hook_tmcivi_resource_dir
- * @param <type> $type
- * @param <type> $plugins_dir
  */
-function tmcivi_tmcivi_resource_dir($type, &$plugins_dir = array()) {
+function tmcivi_tmcivi_resource_dir($type) {
     if ($type == 'js') {
         return drupal_get_path('module', 'tmcivi') . '/resource/js/auto';
         

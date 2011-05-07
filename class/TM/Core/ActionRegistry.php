@@ -15,7 +15,7 @@
 // standard acl requiremens for easy reference.
 define('TM_REGISTRY_ACL_CIDVIEW', 'CRM_Contact_BAO_Contact_Permission::allow( (int)$post_cid, CRM_Core_Permission::VIEW )');
 define('TM_REGISTRY_ACL_CIDEDIT', 'CRM_Contact_BAO_Contact_Permission::allow( (int)$post_cid, CRM_Core_Permission::EDIT )');
-define('TM_REGISTRY_ACL_CIDEDIT', 'TM_Permission::allowParticipantAccess( (int)$post_pid )');
+define('TM_REGISTRY_ACL_PIDEDIT', 'TM_Permission::allowParticipantAccess( (int)$post_pid )');
 
 class TM_Core_ActionRegistry extends TM_Core {
 

@@ -2,6 +2,7 @@ tmcivi:
         A module required by some other modules that modify CiviCRM features.
 	Built for CiviCRM 3.1.x, lightly tested with success on 3.3.5.,
             untested on newer versions.
+        Enable module tmcivi_example for some working examples.
 
 Copyright (C) 2010  Allen Shaw (http://github.com/twomice 
 	or http://nswebsolutions.com)

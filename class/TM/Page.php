@@ -17,8 +17,11 @@ class TM_Page extends CRM_Core_Page {
         _tmcivi_initialize();
         drupal_set_title(TM_DEFAULT_TITLE);
 
-        // get $this->tmref either from $_GET or the default page name
-        $this->tmref = CRM_Utils_array::value('tmref', $_GET, TM_DEFAULT_PAGE);
+        // get $this->tmref from $_GET or go to civicrm if none
+        $this->tmref = CRM_Utils_array::value('tmref', $_GET, false);
+        if (!$this->tmref) {
+            drupal_goto('civicrm');
+        }
 
         // Load action components based on action registry
         $registry = TM_Core_ActionRegistry::get();

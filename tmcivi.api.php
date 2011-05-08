@@ -44,6 +44,12 @@ function hook_tmcivi_registry() {
  *   raw_path: directory containing preprocessor files for raw output called by TM_Raw_Page
  */
 function hook_tmcivi_register() {
+    $return = array(
+        'page_path' => '',
+        'form_path' => '',
+        'raw_path'  => '',
+    );
+    return $return;
 }
 
 /**

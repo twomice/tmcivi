@@ -9,7 +9,7 @@
 
 /* If $_GET['tmformat'] == 'raw', a Smarty template is compiled. Pass values to the template
    with Smarty's assign() method. */
-$this->assign('INC_templatePath', module_invoke('tmcivi', 'tmcivi_template_dir'));
+$this->assign('INC_templatePath', module_invoke('tmcivi_example', 'tmcivi_template_dir'));
 
 
 // Otherwise, $this->output is translated to JSON and printed.

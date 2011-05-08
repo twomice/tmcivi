@@ -36,7 +36,10 @@ class TM_Form extends CRM_Core_Form {
                           $name = null ) {
         _tmcivi_initialize();
 
-        $this->tmref = CRM_Utils_array::value('tmref', $_GET);
+        $this->tmref = CRM_Utils_array::value('tmref', $_GET, false);
+        if (!$this->tmref) {
+            drupal_goto('civicrm');
+        }
 
         // Load action components based on action registry
         $registry = TM_Core_ActionRegistry::get();

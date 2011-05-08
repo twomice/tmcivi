@@ -1,0 +1,112 @@
+<?php
+/*
+ * $Id$
+ */
+
+/**
+ * Implementation of hook_perm()
+ */
+function tmcivi_example_perm() {
+  $perms = array(
+    'access tmcivi examples',
+  );
+
+  return $perms;
+}
+
+/**
+ * Implementation of hook_tmcivi_registry
+ * @return array
+ */
+function tmcivi_example_tmcivi_registry() {
+    $registry = array(
+        /* Format: ID => array(
+         *      'p'     => PERM,
+         *      't'     => TITLE,
+         *      'b'     => BREADCRUMB,
+         *      'f'     => IS_FORM,
+         *      'a'     => ACL REQUIREMENT (eval'd code)
+         * );
+         */
+        'viewExamplePage' => array( 'p' => 'access tmcivi examples', 't' => 'Example Page'),
+        'viewExampleForm' => array( 'p' => 'access tmcivi examples', 't' => 'Example Form', 'b' => 'tm:viewExamplePage', ),
+        'viewExampleRaw'  => array( 'p' => 'access tmcivi examples', ), // raw output with own template
+        '' => array( 'p' => ''),
+    );
+    return $registry;
+}
+
+/**
+ * Implementation of hook_tmcivi_template_dir
+ */
+function tmcivi_example_tmcivi_template_dir() {
+    return realpath( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'Smarty/templates';
+}
+
+/**
+ * Implementation of hook_tmcivi_plugins_dir
+ */
+function tmcivi_example_tmcivi_plugins_dir() {
+    return realpath( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'Smarty/plugins';
+}
+
+/**
+ * Implementation of hook_tmcivi_custom_php_dir
+ */
+function tmcivi_example_tmcivi_class_dir() {
+    return realpath( dirname( __FILE__ ) ) . '/class';
+}
+
+/**
+ * Implementation of hook_tmcivi_resource_dir
+ */
+function tmcivi_example_tmcivi_resource_dir($type) {
+    if ($type == 'js') {
+        return drupal_get_path('module', 'tmcivi_example') . '/resource/js/auto';
+        
+    } elseif ($type == 'css') {
+      return drupal_get_path('module', 'tmcivi_example') . '/resource/css/auto';
+        
+    } elseif ($type == 'base') {
+      return drupal_get_path('module', 'tmcivi_example') . '/resource';
+
+    }
+
+}
+
+/**
+ * Implementation of hook_tmcivi_register
+ * @return <type>
+ */
+function tmcivi_example_tmcivi_register() {
+    $return = array(
+        'page_path' => realpath( dirname( __FILE__ ) ) . '/class/TM/Page',
+        'form_path' => realpath( dirname( __FILE__ ) ) . '/class/TM/Form',
+        'raw_path'  => realpath( dirname( __FILE__ ) ) . '/class/TM/Raw',
+    );
+    return $return;
+}
+
+/**
+ * Implementation of hook_civicrm_dashboard
+ */
+function  tmcivi_example_civicrm_dashboard( $contactID, &$contentPlacement ) {
+    $contentPlacement = CRM_Utils_Hook::DASHBOARD_ABOVE;
+
+    $html = '<p>The module "tmcivi Example" provides these example links for your reference:</p>
+        <ul>
+            <li><a href="'. CRM_Utils_System::url('civicrm/tm/page', 'tmref=viewExamplePage' ) .'">Example page</a></li>
+            <li><a href="'. CRM_Utils_System::url('civicrm/tm/form', 'tmref=viewExampleForm' ) .'">Example form</a></li>
+            <li><a href="'. CRM_Utils_System::url('civicrm/tm/raw', 'tmref=viewExampleRaw' ) .'">Example raw AJAX output</a></li>
+            <li><a href="'. CRM_Utils_System::url('civicrm/tm/raw', 'tmref=viewExampleRaw&tmformat=raw' ) .'">Example raw templated output</a></li>           
+        </ul>
+        <p>To remove this text, disable the module "tmcivi Example". </p>
+    ';
+
+
+    $content = array(
+        'tmcivi Example module links' => $html,
+    );
+    
+    return $content;
+}

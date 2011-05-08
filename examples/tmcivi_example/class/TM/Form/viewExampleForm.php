@@ -13,5 +13,5 @@ function viewExampleForm_buildQuickForm(&$form) {
 }
 
 function viewExampleForm_postProcess(&$form) {
-  dsm($form->_submitValues);
+  CRM_Core_Session::setStatus('If this were a real form, we might have saved the value: '. check_plain($form->_submitValues['title']));
 }

@@ -17,7 +17,11 @@ class TM_Raw_Page extends CRM_Core_Page {
         _tmcivi_initialize();
 
         // get $this->tmref either from $_GET or the default page name
-        $this->tmref = CRM_Utils_array::value('tmref', $_GET, NULL);
+        $this->tmref = CRM_Utils_array::value('tmref', $_GET, false);
+        if (!$this->tmref) {
+            drupal_goto('civicrm');
+        }
+
         $this->tpl = CRM_Core_Smarty::singleton();
 
         // Load action components based on action registry

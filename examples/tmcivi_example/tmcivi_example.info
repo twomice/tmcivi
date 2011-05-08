@@ -1,0 +1,8 @@
+name = tmcivi Example
+description = Example module using tmcivi Tools module
+version = 6.x-1.0-alpha
+dependencies[] = civicrm
+dependencies[] = tmcivi
+package = tmcivi
+core = 6.x
+php = 5.2

@@ -83,10 +83,21 @@ class TM_Page extends CRM_Core_Page {
 
         // Include any like-named js or css files
         _tmcivi_include_resources($this->subpage);
-        
+
         // Add breadcrumb
-        $bc = TM_Util::build_action_breadcrumb($properties);
+        if ( $properties['breadcrumb'] === NULL ) {
+            // If no breadcrumb defined, just use CiviCRM link
+            $bc = array(
+                array(
+                    'title' => ts('CiviCRM'),
+                    'url'   => '/civicrm?reset=1',
+                ),
+            );
+        } else {
+          $bc = TM_Util::build_action_breadcrumb($this->properties);
+        }
         CRM_Utils_System::appendBreadCrumb( $bc );
+
 
         // Set the title, if there is one:
         if (isset($properties['title'])) {

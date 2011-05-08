@@ -79,25 +79,26 @@ class TM_Core_ActionRegistry extends TM_Core {
                     $registry[$key] = $properties;
                 }
 
-                $module_properties = module_invoke($module, 'tmcivi_register');
+                $module_properties = array();
+                $registered_properties = module_invoke($module, 'tmcivi_path');
 
                 // Set default page class path
-                if (!isset($module_properties['page_path'])) {
-                    $module_properties['page_path'] = rtrim(_tmcivi_document_root(), '/') . base_path() . drupal_get_path('module', $module) . '/class/TM/Page/';
+                if (!isset($registered_properties['page'])) {
+                    $registered_properties['page'] = rtrim(_tmcivi_document_root(), '/') . base_path() . drupal_get_path('module', $module) . '/class/TM/Page/';
                 }
-                $module_properties['page_path'] = rtrim($module_properties['page_path'], DIRECTORY_SEPARATOR .'/\\'). DIRECTORY_SEPARATOR;
+                $module_properties['page_path'] = rtrim($registered_properties['page'], DIRECTORY_SEPARATOR .'/\\'). DIRECTORY_SEPARATOR;
 
                 // Set default form class path
-                if (!isset($module_properties['form_path'])) {
-                    $module_properties['form_path'] = rtrim(_tmcivi_document_root(), '/') . base_path() . drupal_get_path('module', $module) . '/class/TM/Form/';
+                if (!isset($registered_properties['form'])) {
+                    $registered_properties['form'] = rtrim(_tmcivi_document_root(), '/') . base_path() . drupal_get_path('module', $module) . '/class/TM/Form/';
                 }
-                $module_properties['form_path'] = rtrim($module_properties['form_path'], DIRECTORY_SEPARATOR .'/\\'). DIRECTORY_SEPARATOR;
+                $module_properties['form_path'] = rtrim($registered_properties['form'], DIRECTORY_SEPARATOR .'/\\'). DIRECTORY_SEPARATOR;
 
                 // Set default raw class path
-                if (!isset($module_properties['raw_path'])) {
-                    $module_properties['raw_path'] = rtrim(_tmcivi_document_root(), '/') . base_path() . drupal_get_path('module', $module) . '/class/TM/Raw/Raw/';
+                if (!isset($registered_properties['raw'])) {
+                    $registered_properties['raw'] = rtrim(_tmcivi_document_root(), '/') . base_path() . drupal_get_path('module', $module) . '/class/TM/Raw/';
                 }
-                $module_properties['raw_path'] = rtrim($module_properties['raw_path'], DIRECTORY_SEPARATOR .'/\\'). DIRECTORY_SEPARATOR;
+                $module_properties['raw_path'] = rtrim($registered_properties['raw'], DIRECTORY_SEPARATOR .'/\\'). DIRECTORY_SEPARATOR;
                 
                 $this->modules[$module] = $module_properties;
 

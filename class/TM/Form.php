@@ -183,7 +183,17 @@ class TM_Form extends CRM_Core_Form {
         _tmcivi_include_resources($this->tmref);
 
         // Add breadcrumb
-        $bc = TM_Util::build_action_breadcrumb($this->properties);
+        if ( !$this->properties['breadcrumb'] ) {
+            // If no breadcrumb defined, just use CiviCRM link
+            $bc = array(
+                array(
+                    'title' => ts('CiviCRM'),
+                    'url'   => '/civicrm?reset=1',
+                ),
+            );
+        } else {
+          $bc = TM_Util::build_action_breadcrumb($this->properties);
+        }
         CRM_Utils_System::appendBreadCrumb( $bc );
 
         // SEt the title, if there is one:

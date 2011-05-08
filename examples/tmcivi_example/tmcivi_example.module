@@ -23,13 +23,13 @@ function tmcivi_example_tmcivi_registry() {
         /* Format: ID => array(
          *      'p'     => PERM,
          *      't'     => TITLE,
-         *      'b'     => BREADCRUMB,
+         *      'b'     => BREADCRUMB (defaults to civicrm path; use empty string to have no breadcrumb),
          *      'f'     => IS_FORM,
          *      'a'     => ACL REQUIREMENT (eval'd code)
          * );
          */
-        'viewExamplePage' => array( 'p' => 'access tmcivi examples', 't' => 'Example Page'),
-        'viewExampleForm' => array( 'p' => 'access tmcivi examples', 't' => 'Example Form', 'b' => 'tm:viewExamplePage', ),
+        'viewExamplePage' => array( 'p' => 'access tmcivi examples', 't' => 'Example Page', ),
+        'viewExampleForm' => array( 'p' => 'access tmcivi examples', 't' => 'Example Form', ),
         'viewExampleRaw'  => array( 'p' => 'access tmcivi examples', ), // raw output with own template
         '' => array( 'p' => ''),
     );
@@ -72,19 +72,6 @@ function tmcivi_example_tmcivi_resource_dir($type) {
 
     }
 
-}
-
-/**
- * Implementation of hook_tmcivi_register
- * @return <type>
- */
-function tmcivi_example_tmcivi_register() {
-    $return = array(
-        'page_path' => realpath( dirname( __FILE__ ) ) . '/class/TM/Page',
-        'form_path' => realpath( dirname( __FILE__ ) ) . '/class/TM/Form',
-        'raw_path'  => realpath( dirname( __FILE__ ) ) . '/class/TM/Raw',
-    );
-    return $return;
 }
 
 /**

@@ -30,44 +30,44 @@ function tmcivi_perm() {
 /* Implementation of hook_civicrm_config
  */
 function tmcivi_civicrm_config( &$config ) {
-    _tmcivi_initialize();
+  _tmcivi_initialize();
 }
 
 /* Implementation of hook_civicrm_xmlMenu
  */
 function tmcivi_civicrm_xmlMenu( &$files ) {
-    $files[] =
-        drupal_get_path('module', 'tmcivi') . DIRECTORY_SEPARATOR .
-        'civicrm_xmlMenu.xml';
+  $files[] =
+    drupal_get_path('module', 'tmcivi') . DIRECTORY_SEPARATOR .
+    'civicrm_xmlMenu.xml';
 }
 
 /*
  * Implementation of hook_civicrm_pageRun
  */
 function tmcivi_civicrm_pageRun(&$page) {
-    // Include any like-named js and css files.
-    _tmcivi_include_resources($page->getVar('_name'));
+  // Include any like-named js and css files.
+  _tmcivi_include_resources($page->getVar('_name'));
 }
 
 /**
  * Implementation of hook_tmcivi_template_dir
  */
 function tmcivi_tmcivi_template_dir() {  
-    return _tmcivi_root_path() . DIRECTORY_SEPARATOR . 'Smarty/templates';
+  return _tmcivi_root_path() . DIRECTORY_SEPARATOR . 'Smarty/templates';
 }
 
 /**
  * Implementation of hook_tmcivi_plugins_dir
  */
 function tmcivi_tmcivi_plugins_dir() {
-    return _tmcivi_root_path() . DIRECTORY_SEPARATOR . 'Smarty/plugins';
+  return _tmcivi_root_path() . DIRECTORY_SEPARATOR . 'Smarty/plugins';
 }
 
 /**
  * Implementation of hook_tmcivi_custom_php_dir
  */
 function tmcivi_tmcivi_class_dir() {
-    return _tmcivi_root_path() . '/class';
+  return _tmcivi_root_path() . '/class';
 }
 
 /**
@@ -78,4 +78,11 @@ function tmcivi_enable() {
   civicrm_initialize( );
   require_once 'CRM/Core/Menu.php';
   CRM_Core_Menu::store( );
+}
+
+/**
+ * Implementation of hook_tmcivi_path
+ */
+function tmcivi_tmcivi_path() {
+   $paths['raw'] = _tmcivi_root_path() . '/class/TM/Raw/Raw';
 }

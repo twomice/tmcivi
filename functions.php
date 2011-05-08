@@ -139,3 +139,11 @@ function tm_query($query) {
     db_set_active($default);
     return $ret;
 }
+
+function _tmcivi_root_path() {
+    static $ret;
+    if ( ! $ret ) {
+        $ret = realpath( dirname( __FILE__ ) );
+    }
+    return $ret;
+}

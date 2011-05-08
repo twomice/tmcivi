@@ -28,7 +28,7 @@
         }
 
         if ( isset( $type ) && $type == 'css') {
-            $fileSystemPath = TM_ROOT_PATH .'/resource/css/'. $file;
+            $fileSystemPath = _tmcivi_root_path() .'/resource/css/'. $file;
             $fileResourcePath = TM_RESOURCE_ROOT_URL .'/css/'. $file;
 
             if (file_exists($fileSystemPath)) {
@@ -36,7 +36,7 @@
             }
 
         } else {
-            $fileSystemPath = TM_ROOT_PATH .'/resource/js/'. $file;
+            $fileSystemPath = _tmcivi_root_path() .'/resource/js/'. $file;
             $fileResourcePath = TM_RESOURCE_ROOT_URL .'/js/'. $file;
 
             if (file_exists($fileSystemPath)) {

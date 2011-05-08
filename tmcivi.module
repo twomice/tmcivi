@@ -3,9 +3,6 @@
  * $Id$
  */
 
-
-define('TM_ROOT_PATH', realpath( dirname( __FILE__ ) ) );
-
 /*
 define ('TM_RESOURCE_ROOT_URL',
     drupal_get_path('module','tmcivi'). '/resource'
@@ -90,21 +87,21 @@ function tmcivi_tmcivi_registry() {
  * Implementation of hook_tmcivi_template_dir
  */
 function tmcivi_tmcivi_template_dir() {  
-    return TM_ROOT_PATH . DIRECTORY_SEPARATOR . 'Smarty/templates';
+    return _tmcivi_root_path() . DIRECTORY_SEPARATOR . 'Smarty/templates';
 }
 
 /**
  * Implementation of hook_tmcivi_plugins_dir
  */
 function tmcivi_tmcivi_plugins_dir() {
-    return TM_ROOT_PATH . DIRECTORY_SEPARATOR . 'Smarty/plugins';
+    return _tmcivi_root_path() . DIRECTORY_SEPARATOR . 'Smarty/plugins';
 }
 
 /**
  * Implementation of hook_tmcivi_custom_php_dir
  */
 function tmcivi_tmcivi_class_dir() {
-    return TM_ROOT_PATH . '/class';
+    return _tmcivi_root_path() . '/class';
 }
 
 /**
@@ -122,4 +119,14 @@ function tmcivi_tmcivi_resource_dir($type) {
 
     }
 
+}
+
+/**
+ * Implementation of hook_enable()
+ */
+function tmcivi_enable() {
+  // invoke civicrm menu rebuild, as we're adding some civicrm paths
+  civicrm_initialize( );
+  require_once 'CRM/Core/Menu.php';
+  CRM_Core_Menu::store( );
 }
